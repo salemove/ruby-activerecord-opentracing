@@ -30,10 +30,11 @@ RSpec.describe ActiveRecord::Tracer do
     expect(span.tags).to eq(
       component: 'ActiveRecord',
       :"span.kind" => 'client',
-      :"db.instance" => 'sqlite3:///tracer-test',
+      :"db.instance" => 'tracer-test',
       :"db.statement" => 'SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?',
       :"db.cached" => false,
-      :"db.type" => 'sql'
+      :"db.type" => 'sql',
+      :"peer.address" => 'sqlite3:///tracer-test'
     )
   end
 
@@ -59,10 +60,11 @@ RSpec.describe ActiveRecord::Tracer do
     expect(span.tags).to eq(
       component: 'ActiveRecord',
       :"span.kind" => 'client',
-      :"db.instance" => 'sqlite3:///tracer-test',
+      :"db.instance" => 'tracer-test',
       :"db.statement" => 'SELECT COUNT(1) FROM users',
       :"db.cached" => false,
-      :"db.type" => 'sql'
+      :"db.type" => 'sql',
+      :"peer.address" => 'sqlite3:///tracer-test'
     )
   end
 
@@ -83,10 +85,11 @@ RSpec.describe ActiveRecord::Tracer do
     expect(span.tags).to eq(
       component: 'ActiveRecord',
       :"span.kind" => 'client',
-      :"db.instance" => 'sqlite3:///tracer-test',
+      :"db.instance" => 'tracer-test',
       :"db.statement" => 'SELECT * FROM users WHERE email IS NULL',
       :"db.cached" => false,
       :"db.type" => 'sql',
+      :"peer.address" => 'sqlite3:///tracer-test',
       error: true
     )
     expect(span.logs).to include(

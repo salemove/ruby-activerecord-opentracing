@@ -22,7 +22,8 @@ module ActiveRecord
             :'db.instance' => db_instance,
             :'db.cached' => payload.fetch(:cached, false),
             :'db.statement' => payload.fetch(:sql).squish,
-            :'db.type' => DB_TYPE
+            :'db.type' => DB_TYPE,
+            :'peer.address' => db_address
           }
         )
 
@@ -43,7 +44,11 @@ module ActiveRecord
       private
 
       def db_instance
-        @db_instance ||= begin
+        @db_instance ||= db_config.fetch(:database)
+      end
+
+      def db_address
+        @db_address ||= begin
           connection_config = ActiveRecord::Base.connection_config
           username = connection_config[:username]
           host = connection_config[:host]
@@ -57,6 +62,10 @@ module ActiveRecord
           str << "/#{database}"
           str
         end
+      end
+
+      def db_config
+        @db_config ||= ActiveRecord::Base.connection_config
       end
     end
   end
