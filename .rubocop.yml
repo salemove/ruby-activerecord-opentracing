@@ -12,6 +12,9 @@ RSpec/NestedGroups:
 RSpec/ExampleLength:
   Enabled: no
 
+RSpec/FilePath:
+  Enabled: no
+
 RSpec/MultipleExpectations:
   Enabled: no
 

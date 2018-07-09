@@ -1,4 +1,4 @@
-# ActiveRecord::Tracer
+# ActiveRecord::OpenTracing
 
 Adds OpenTracing instrumentation to ActiveRecord
 
@@ -7,7 +7,7 @@ Adds OpenTracing instrumentation to ActiveRecord
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'active_record-tracer'
+gem 'activerecord-opentracing'
 ```
 
 ## Usage
@@ -16,8 +16,8 @@ gem 'active_record-tracer'
 require 'opentracing'
 OpenTracing.global_tracer = TracerImplementation.new
 
-require 'active_record/tracer'
-ActiveRecord::Tracer.instrument
+require 'active_record/opentracing'
+ActiveRecord::OpenTracing.instrument
 ```
 
 ## Development

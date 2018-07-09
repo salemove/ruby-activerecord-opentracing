@@ -3,12 +3,12 @@
 require 'active_record'
 require 'opentracing'
 
-require 'active_record/tracer/version'
-require 'active_record/tracer/processor'
+require 'active_record/opentracing/version'
+require 'active_record/opentracing/processor'
 
 module ActiveRecord
-  module Tracer
-    def self.instrument(tracer: OpenTracing.global_tracer)
+  module OpenTracing
+    def self.instrument(tracer: ::OpenTracing.global_tracer)
       processor = Processor.new(tracer)
 
       ActiveSupport::Notifications.subscribe('sql.active_record') do |*args|

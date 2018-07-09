@@ -1,4 +1,4 @@
-RSpec.describe ActiveRecord::Tracer do
+RSpec.describe ActiveRecord::OpenTracing do
   let(:tracer) { OpenTracingTestTracer.build }
 
   before do

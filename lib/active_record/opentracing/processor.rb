@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ActiveRecord
-  module Tracer
+  module OpenTracing
     class Processor
       DEFAULT_OPERATION_NAME = 'sql.query'.freeze
       COMPONENT_NAME = 'ActiveRecord'.freeze

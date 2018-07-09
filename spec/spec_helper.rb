@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'active_record/tracer'
+require 'active_record/opentracing'
 require 'opentracing_test_tracer'
 
 RSpec.configure do |config|
