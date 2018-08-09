@@ -17,18 +17,18 @@ module ActiveRecord
           payload[:name] || DEFAULT_OPERATION_NAME,
           start_time: start,
           tags: {
-            component: COMPONENT_NAME,
-            :'span.kind' => SPAN_KIND,
-            :'db.instance' => db_instance,
-            :'db.cached' => payload.fetch(:cached, false),
-            :'db.statement' => payload.fetch(:sql).squish,
-            :'db.type' => DB_TYPE,
-            :'peer.address' => db_address
+            'component' => COMPONENT_NAME,
+            'span.kind' => SPAN_KIND,
+            'db.instance' => db_instance,
+            'db.cached' => payload.fetch(:cached, false),
+            'db.statement' => payload.fetch(:sql).squish,
+            'db.type' => DB_TYPE,
+            'peer.address' => db_address
           }
         )
 
         if (exception = payload[:exception_object])
-          span.set_tag(:error, true)
+          span.set_tag('error', true)
           span.log_kv(
             event: 'error',
             :'error.kind' => exception.class.to_s,

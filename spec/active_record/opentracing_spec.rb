@@ -28,13 +28,13 @@ RSpec.describe ActiveRecord::OpenTracing do
     span = tracer.spans.last
     expect(span.operation_name).to eq('User Load')
     expect(span.tags).to eq(
-      component: 'ActiveRecord',
-      :"span.kind" => 'client',
-      :"db.instance" => 'tracer-test',
-      :"db.statement" => 'SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?',
-      :"db.cached" => false,
-      :"db.type" => 'sql',
-      :"peer.address" => 'sqlite3:///tracer-test'
+      'component' => 'ActiveRecord',
+      'span.kind' => 'client',
+      'db.instance' => 'tracer-test',
+      'db.statement' => 'SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?',
+      'db.cached' => false,
+      'db.type' => 'sql',
+      'peer.address' => 'sqlite3:///tracer-test'
     )
   end
 
@@ -58,13 +58,13 @@ RSpec.describe ActiveRecord::OpenTracing do
     span = tracer.spans.last
     expect(span.operation_name).to eq('sql.query')
     expect(span.tags).to eq(
-      component: 'ActiveRecord',
-      :"span.kind" => 'client',
-      :"db.instance" => 'tracer-test',
-      :"db.statement" => 'SELECT COUNT(1) FROM users',
-      :"db.cached" => false,
-      :"db.type" => 'sql',
-      :"peer.address" => 'sqlite3:///tracer-test'
+      'component' => 'ActiveRecord',
+      'span.kind' => 'client',
+      'db.instance' => 'tracer-test',
+      'db.statement' => 'SELECT COUNT(1) FROM users',
+      'db.cached' => false,
+      'db.type' => 'sql',
+      'peer.address' => 'sqlite3:///tracer-test'
     )
   end
 
@@ -83,14 +83,14 @@ RSpec.describe ActiveRecord::OpenTracing do
     span = tracer.spans.last
     expect(span.operation_name).to eq('sql.query')
     expect(span.tags).to eq(
-      component: 'ActiveRecord',
-      :"span.kind" => 'client',
-      :"db.instance" => 'tracer-test',
-      :"db.statement" => 'SELECT * FROM users WHERE email IS NULL',
-      :"db.cached" => false,
-      :"db.type" => 'sql',
-      :"peer.address" => 'sqlite3:///tracer-test',
-      error: true
+      'component' => 'ActiveRecord',
+      'span.kind' => 'client',
+      'db.instance' => 'tracer-test',
+      'db.statement' => 'SELECT * FROM users WHERE email IS NULL',
+      'db.cached' => false,
+      'db.type' => 'sql',
+      'peer.address' => 'sqlite3:///tracer-test',
+      'error' => true
     )
     expect(span.logs).to include(
       a_hash_including(
