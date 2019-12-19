@@ -16,8 +16,10 @@ RSpec.describe ActiveRecord::OpenTracing do
     SQL
   end
 
+  # rubocop:disable RSpec/LeakyConstantDeclaration
   class User < ActiveRecord::Base
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration
 
   it 'records sql select query' do
     User.first # load table schema, etc
@@ -95,8 +97,8 @@ RSpec.describe ActiveRecord::OpenTracing do
     expect(span.logs).to include(
       a_hash_including(
         event: 'error',
-        :'error.kind' => thrown_exception.class.to_s,
-        :'error.object' => thrown_exception,
+        'error.kind': thrown_exception.class.to_s,
+        'error.object': thrown_exception,
         message: thrown_exception.message,
         stack: thrown_exception.backtrace.join("\n")
       )
