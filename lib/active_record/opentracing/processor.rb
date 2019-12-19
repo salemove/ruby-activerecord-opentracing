@@ -3,10 +3,10 @@
 module ActiveRecord
   module OpenTracing
     class Processor
-      DEFAULT_OPERATION_NAME = 'sql.query'.freeze
-      COMPONENT_NAME = 'ActiveRecord'.freeze
-      SPAN_KIND = 'client'.freeze
-      DB_TYPE = 'sql'.freeze
+      DEFAULT_OPERATION_NAME = 'sql.query'
+      COMPONENT_NAME = 'ActiveRecord'
+      SPAN_KIND = 'client'
+      DB_TYPE = 'sql'
 
       def initialize(tracer)
         @tracer = tracer
@@ -31,8 +31,8 @@ module ActiveRecord
           span.set_tag('error', true)
           span.log_kv(
             event: 'error',
-            :'error.kind' => exception.class.to_s,
-            :'error.object' => exception,
+            'error.kind': exception.class.to_s,
+            'error.object': exception,
             message: exception.message,
             stack: exception.backtrace.join("\n")
           )
