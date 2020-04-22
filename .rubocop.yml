@@ -1,46 +1,35 @@
-require: rubocop-rspec
+---
+  inherit_gem:
+    dox-style:
+    - ".rubocop.yml"
+  
+  Env/OutsideConfig:
+    Exclude:
+      - "./tasks/ci.rake"
+  
+  Env/UndefinedVar:
+    Exclude:
+      - "./tasks/ci.rake"
+  
+  Env/UseFetch:
+    Exclude:
+      - "./bin/*"
+  
+  Metrics/BlockLength:
+    Exclude:
+      - "./**/*_spec*.rb"
+      - "./*.gemspec"
+      - "./spec/*_helper*.rb"
+      - "./tasks/ci.rake"
+      - "Gemfile"
+  
+  Metrics/ModuleLength:
+    Exclude:
+      - "./**/*_spec*.rb"
+  
+  Metrics/MethodLength:
+    Exclude:
+      - "./**/*_spec*.rb"
 
-Style/Documentation:
-  Enabled: no
-
-Style/IfUnlessModifier:
-  Enabled: no
-
-RSpec/NestedGroups:
-  Max: 4
-
-RSpec/ExampleLength:
-  Enabled: no
-
-RSpec/FilePath:
-  Enabled: no
-
-RSpec/MultipleExpectations:
-  Enabled: no
-
-Metrics/BlockLength:
-  Enabled: no
-
-Metrics/MethodLength:
-  Enabled: no
-
-Metrics/AbcSize:
-  Enabled: no
-
-Metrics/ClassLength:
-  Enabled: no
-
-Metrics/ParameterLists:
-  Enabled: no
-
-Lint/UnusedMethodArgument:
-  Enabled: no
-
-Style/FrozenStringLiteralComment:
-  Enabled: yes
-  EnforcedStyle: always
-  Include:
-    - 'lib/**/*'
-
-Metrics/LineLength:
-  Max: 120
+  Rails/ApplicationRecord:
+    Enabled: false
