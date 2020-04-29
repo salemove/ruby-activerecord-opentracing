@@ -7,7 +7,7 @@ Adds OpenTracing instrumentation to ActiveRecord
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activerecord-opentracing'
+gem 'activerecord-instrumentation'
 ```
 
 ## Usage
@@ -16,8 +16,10 @@ gem 'activerecord-opentracing'
 require 'opentracing'
 OpenTracing.global_tracer = TracerImplementation.new
 
-require 'active_record/opentracing'
-ActiveRecord::OpenTracing.instrument
+require 'active_record/open_tracing'
+# If a sanitizer is specified, it will be used to scrub the sql statements. This is optional.
+sanitizer = ActiveRecord::OpenTracing::SqlSanitizer.build_sanitizer(:mysql)
+ActiveRecord::OpenTracing.instrument(sanitizer: sanitizer)
 ```
 
 # Development

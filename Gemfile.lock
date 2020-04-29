@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    activerecord-instrumentation (0.3.0)
-      activerecord (~> 6.0)
+    activerecord-instrumentation (0.4.0)
+      activerecord
       opentracing (~> 0.5)
 
 GEM

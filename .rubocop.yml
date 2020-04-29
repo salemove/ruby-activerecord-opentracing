@@ -22,7 +22,11 @@
       - "./spec/*_helper*.rb"
       - "./tasks/ci.rake"
       - "Gemfile"
-  
+
+  Layout/LineLength:
+    Exclude:
+      - "./**/*_spec.rb"
+
   Metrics/ModuleLength:
     Exclude:
       - "./**/*_spec*.rb"
@@ -31,5 +35,5 @@
     Exclude:
       - "./**/*_spec*.rb"
 
-  Rails/ApplicationRecord:
+  Rails:
     Enabled: false
