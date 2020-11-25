@@ -1,6 +1,6 @@
 require 'bundler/setup'
 require 'active_record/opentracing'
-require 'opentracing_test_tracer'
+require 'signalfx_test_tracer'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

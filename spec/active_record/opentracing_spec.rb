@@ -92,16 +92,10 @@ RSpec.describe ActiveRecord::OpenTracing do
       'db.cached' => false,
       'db.type' => 'sql',
       'peer.address' => 'sqlite3:///tracer-test',
-      'error' => true
-    )
-    expect(span.logs).to include(
-      a_hash_including(
-        event: 'error',
-        'error.kind': thrown_exception.class.to_s,
-        'error.object': thrown_exception,
-        message: thrown_exception.message,
-        stack: thrown_exception.backtrace.join("\n")
-      )
+      'error' => true,
+      'sfx.error.kind' => thrown_exception.class.to_s,
+      'sfx.error.message' => thrown_exception.message,
+      'sfx.error.stack' => thrown_exception.backtrace.join('\n')
     )
   end
 end

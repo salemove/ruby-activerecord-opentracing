@@ -28,14 +28,7 @@ module ActiveRecord
         )
 
         if (exception = payload[:exception_object])
-          span.set_tag('error', true)
-          span.log_kv(
-            event: 'error',
-            'error.kind': exception.class.to_s,
-            'error.object': exception,
-            message: exception.message,
-            stack: exception.backtrace.join("\n")
-          )
+          span.record_exception(exception)
         end
 
         span.finish(end_time: finish)
