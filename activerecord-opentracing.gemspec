@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'active_record/opentracing/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'activerecord-opentracing'
+  spec.name          = 'signalfx-activerecord-opentracing'
   spec.version       = ActiveRecord::OpenTracing::VERSION
   spec.authors       = ['SaleMove TechMovers']
   spec.email         = ['techmovers@salemove.com']
@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.17.3'
-  spec.add_development_dependency 'opentracing_test_tracer', '~> 0.1'
+  spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'signalfx_test_tracer', '~> 0.1.4'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9.0'
   spec.add_development_dependency 'rubocop', '~> 0.78.0'
