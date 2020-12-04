@@ -7,7 +7,7 @@ Adds OpenTracing instrumentation to ActiveRecord
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'activerecord-opentracing'
+gem 'signalfx-activerecord-opentracing'
 ```
 
 ## Usage

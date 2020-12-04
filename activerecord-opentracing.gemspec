@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'ActiveRecord OpenTracing intrumenter'
   spec.description   = ''
-  spec.homepage      = 'https://github.com/salemove/ruby-activerecord-opentracing'
+  spec.homepage      = 'https://github.com/signalfx/ruby-activerecord-opentracing'
   spec.license       = 'MIT'
 
   # Specify which files should be added to the gem when it is released.
