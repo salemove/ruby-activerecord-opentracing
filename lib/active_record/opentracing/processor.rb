@@ -49,7 +49,7 @@ module ActiveRecord
 
       def db_address
         @db_address ||= begin
-          connection_config = ActiveRecord::Base.connection_config
+          connection_config = db_config
           username = connection_config[:username]
           host = connection_config[:host]
           database = connection_config.fetch(:database)
@@ -65,7 +65,7 @@ module ActiveRecord
       end
 
       def db_config
-        @db_config ||= ActiveRecord::Base.connection_config
+        @db_config ||= ActiveRecord::Base.connection_db_config.configuration_hash
       end
     end
   end
