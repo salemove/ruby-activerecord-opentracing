@@ -10,5 +10,7 @@
 /tracer-test
 /Gemfile.lock
 
+*.gem
+
 # rspec failure tracking
 .rspec_status
