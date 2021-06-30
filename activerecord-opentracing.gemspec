@@ -21,13 +21,13 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 2.1'
-  spec.add_development_dependency 'signalfx_test_tracer', '~> 0.1.4'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9.0'
   spec.add_development_dependency 'rubocop', '~> 0.78.0'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.37.0'
+  spec.add_development_dependency 'signalfx_test_tracer', '~> 0.1.4'
   spec.add_development_dependency 'sqlite3', '~> 1.4.2'
 
-  spec.add_dependency 'activerecord', '~> 6.0'
+  spec.add_dependency 'activerecord', '>= 5.2', '< 7.0'
   spec.add_dependency 'opentracing', '~> 0.5'
 end
