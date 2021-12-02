@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '~> 1.37.0'
   spec.add_development_dependency 'sqlite3', '~> 1.4.2'
 
-  spec.add_dependency 'activerecord', '>= 6.1', '< 7.0.0
+  spec.add_dependency 'activerecord', '>= 6.1', '< 7.0.0'
   spec.add_dependency 'opentracing', '~> 0.5'
 end
