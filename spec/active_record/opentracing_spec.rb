@@ -16,10 +16,10 @@ RSpec.describe ActiveRecord::OpenTracing do
     SQL
   end
 
-  # rubocop:disable RSpec/LeakyConstantDeclaration
+  # rubocop:disable RSpec/LeakyConstantDeclaration,Lint/ConstantDefinitionInBlock
   class User < ActiveRecord::Base
   end
-  # rubocop:enable RSpec/LeakyConstantDeclaration
+  # rubocop:enable RSpec/LeakyConstantDeclaration,Lint/ConstantDefinitionInBlock
 
   it 'records sql select query' do
     User.first # load table schema, etc

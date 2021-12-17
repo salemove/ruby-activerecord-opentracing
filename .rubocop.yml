@@ -1,5 +1,9 @@
 require: rubocop-rspec
 
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+
 Style/Documentation:
   Enabled: no
 
@@ -44,3 +48,6 @@ Style/FrozenStringLiteralComment:
 
 Metrics/LineLength:
   Max: 120
+
+Gemspec/RequireMFA:
+  Enabled: no
