@@ -54,9 +54,51 @@ module ActiveRecord
         }.merge(db_statement(payload))
       end
 
+      # rubocop:disable Metrics/MethodLength
       def db_statement(payload)
-        sql_logging_enabled ? { "db.statement" => sanitize_sql(payload.fetch(:sql).squish) } : {}
+        if sql_logging_enabled
+          query_sql = sanitize_sql(payload.fetch(:sql).squish)
+          first_word = query_sql.split.first.downcase
+
+          {
+            "db.statement" => query_sql,
+            "db.query_type" => first_word,
+            "db.query_category" => query_categories[first_word.to_sym] || "not_found"
+          }
+        else
+          {}
+        end
       end
+
+      # Categories are
+      # table: Run an action against a table changes the table metadata or configuration
+      # read: Read from the database
+      # write: Write or delete records to the database
+      # unknown: Can't tell the query action from the first word of the query
+      # not_found: First word of the query is not in this list
+      def query_categories
+        {
+          alter: "table",
+          call: "unknown", # run a subquery
+          create: "table",
+          delete: "write",
+          drop: "table",
+          do: "read",
+          handler: "table", # table metadata
+          import: "write",
+          insert: "write",
+          load: "write", # covers LOAD XML and LOAD DATA queries
+          rename: "table",
+          replace: "write", # insert, on duplicate overwrite
+          select: "read",
+          table: "read", # similar to select
+          truncate: "table",
+          update: "write",
+          values: "unknown", # generates rows to use as a table but doesn't hit the database
+          with: "unknown" # sets up subqueries in preparation for other queries
+        }
+      end
+      # rubocop:enable Metrics/MethodLength
 
       def sanitize_sql(sql)
         sanitizer ? sanitizer.sanitize(sql) : sql
