@@ -6,7 +6,6 @@ PATH
       opentracing (~> 0.5)
 
 GEM
-  remote: https://artifacts.dox.support/repository/gems/
   remote: https://rubygems.org/
   specs:
     activemodel (6.0.2.2)
