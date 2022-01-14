@@ -118,7 +118,9 @@ module ActiveRecord
       end
 
       def connection_config
-        @connection_config ||= ActiveRecord::Base.connection_config
+        # Rails 6.2 will deprecate ActiveRecord::Base.connection_config
+        @connection_config ||=
+          ActiveRecord::Base.try(:connection_db_config) || ActiveRecord::Base.connection_config
       end
     end
   end
