@@ -7,7 +7,7 @@ executors:
   ruby-latest:
     resource_class: small
     docker:
-      - image: circleci/ruby:2.6.6
+      - image: circleci/ruby:2.7
         environment:
           BUNDLE_VERSION: "~> 1.17"
 
@@ -91,6 +91,19 @@ workflows:
           name: gem-build
           requires:
             - build
+      - pre-release-approval:
+          <<: *pr_only
+          type: approval
+          requires:
+            - gem-build
+      - gem/publish:
+          <<: *pr_only
+          name: gem-publish
+          to_rubygems: true
+          pre_release: true
+          requires:
+            - pre-release-approval
+          context: artifact_publishing
 
   final-release:
     jobs:
