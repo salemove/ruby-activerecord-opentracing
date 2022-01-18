@@ -91,19 +91,6 @@ workflows:
           name: gem-build
           requires:
             - build
-      - pre-release-approval:
-          <<: *pr_only
-          type: approval
-          requires:
-            - gem-build
-      - gem/publish:
-          <<: *pr_only
-          name: gem-publish
-          to_rubygems: true
-          pre_release: true
-          requires:
-            - pre-release-approval
-          context: artifact_publishing
 
   final-release:
     jobs:
@@ -115,12 +102,3 @@ workflows:
           name: gem-build
           requires:
             - build
-      - gem/publish:
-          <<: *version_tags_only
-          name: gem-publish
-          to_rubygems: true
-          pre_release: false
-          requires:
-            - gem-build
-          context: artifact_publishing
-          
