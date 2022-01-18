@@ -7,7 +7,7 @@ executors:
   ruby-latest:
     resource_class: small
     docker:
-      - image: circleci/ruby:latest
+      - image: circleci/ruby:2.7
         environment:
           BUNDLE_VERSION: "~> 1.17"
 
@@ -45,7 +45,7 @@ jobs:
             - v1-bundle-{{ checksum "Gemfile.lock" }}-
       - run:
           name: Install Ruby Dependencies
-          command: bundle check --path=vendor/bundle || bundle install --local --frozen --path=vendor/bundle --jobs=4 --retry=3 && bundle clean
+          command: bundle install --path=vendor/bundle # install every time so we don't have to package vendor/bundle with the gem
       - save_cache:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}-
           paths:
@@ -91,19 +91,6 @@ workflows:
           name: gem-build
           requires:
             - build
-      - pre-release-approval:
-          <<: *pr_only
-          type: approval
-          requires:
-            - gem-build
-      - gem/publish:
-          <<: *pr_only
-          name: gem-publish
-          to_rubygems: true
-          pre_release: true
-          requires:
-            - pre-release-approval
-          context: artifact_publishing
 
   final-release:
     jobs:
@@ -115,12 +102,3 @@ workflows:
           name: gem-build
           requires:
             - build
-      - gem/publish:
-          <<: *version_tags_only
-          name: gem-publish
-          to_rubygems: true
-          pre_release: false
-          requires:
-            - gem-build
-          context: artifact_publishing
-          
