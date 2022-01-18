@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 0.5.1.pre 01/18/2022
+  * Trying to fix the publishing process
+
 ## 0.5.0 01/18/2022
   * Added db.query_type and db.query_category tags
   * Added forwards compatibility code for the connection_config for rails 6.2
