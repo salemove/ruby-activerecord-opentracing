@@ -115,3 +115,11 @@ workflows:
           name: gem-build
           requires:
             - build
+      - gem/publish:
+          <<: *version_tags_only
+          name: gem-publish
+          to_rubygems: true
+          pre_release: false
+          requires:
+            - gem-build
+          context: artifact_publishing
