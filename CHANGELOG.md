@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.5.2.pre 01/24/2022
+## 0.5.2 01/24/2022
   * Fixed query tagging for empty queries
 
 ## 0.5.1 01/20/2022
