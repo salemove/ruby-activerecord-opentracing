@@ -87,7 +87,7 @@ module ActiveRecord
       def db_statement(payload)
         if sql_logging_enabled
           query_sql = sanitize_sql(payload.fetch(:sql).squish)
-          first_word = query_sql.split.first.downcase
+          first_word = query_sql.split.first&.downcase || ""
 
           {
             "db.statement" => query_sql,

@@ -112,4 +112,41 @@ RSpec.describe ActiveRecord::OpenTracing do
       )
     )
   end
+
+  it "doesn't crash on an empty query" do
+    User.first # load table schema, etc
+    described_class.instrument(tracer: tracer)
+
+    thrown_exception = nil
+    begin
+      ActiveRecord::Base.connection.execute ""
+    rescue StandardError => e
+      thrown_exception = e
+    end
+
+    expect(tracer.spans.count).to eq(1)
+    span = tracer.spans.last
+    expect(span.operation_name).to eq("sql.query")
+    expect(span.tags).to eq(
+      "component" => "ActiveRecord",
+      "span.kind" => "client",
+      "db.instance" => "tracer-test",
+      "db.query_category" => "not_found",
+      "db.query_type" => "",
+      "db.statement" => "",
+      "db.cached" => false,
+      "db.type" => "sql",
+      "peer.address" => "sqlite3:///tracer-test",
+      "error" => true
+    )
+    expect(span.logs).to include(
+      a_hash_including(
+        event: "error",
+        'error.kind': thrown_exception.class.to_s,
+        'error.object': thrown_exception,
+        message: thrown_exception.message,
+        stack: thrown_exception.backtrace.join("\n")
+      )
+    )
+  end
 end
