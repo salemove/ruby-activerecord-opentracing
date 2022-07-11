@@ -79,7 +79,8 @@ module ActiveRecord
           "db.instance" => db_instance,
           "db.cached" => payload.fetch(:cached, false),
           "db.type" => DB_TYPE,
-          "peer.address" => peer_address_tag
+          "peer.address" => peer_address_tag,
+          "peer.address_two_the_legend_continues" => payload.connection.host
         }.merge(db_statement(payload))
       end
 
